@@ -14,7 +14,7 @@ build:remote --remote_timeout=7200
 # ========================================
 
 # Enable libc++ and C++20 by default.
-build:linux --config=libc++20
+# build:linux --config=libc++20
 
 # Need for CI image to pickup docker-credential-gcloud, PATH is fixed in rbe-toolchain-* configs.
 build:remote-ci --action_env=PATH=/usr/local/google-cloud-sdk/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/llvm/bin
@@ -74,3 +74,6 @@ build:macos --cxxopt=-Wno-range-loop-analysis
 build:macos --host_cxxopt=-Wno-range-loop-analysis
 build:macos --cxxopt=-Wno-deprecated-declarations
 build:macos --host_cxxopt=-Wno-deprecated-declarations
+
+# fips
+build --define boringssl=fips --build_tag_filters=-nofips --test_tag_filters=-nofips
